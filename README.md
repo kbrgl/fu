@@ -5,9 +5,9 @@ supported as well.
 
 ## Index
 * [Installation](#installation)
-* [Platform support](#platform-support)
+    + [Platform support](#platform-support)
 * [Usage](#usage)
-* [Examples](#examples)
+    + [Examples](#examples)
 * [TODO](#todo)
 * [Contributing](#contributing)
 
@@ -63,15 +63,15 @@ the current directory as the root.
 ```sh
 fu -p . ~
 ```
-### Find all Python scripts in current dir
+#### Find all Python scripts in current dir
 ```sh
 fu -s .py
 ```
-### Find files in current dir whose names start and end with 'a'
+#### Find files in current dir whose names start and end with 'a'
 ```
 fu -r "^a.*a\$"
 ```
-### Fuzzy matching
+#### Fuzzy matching
 ```
 fu -f pkg
 ```
