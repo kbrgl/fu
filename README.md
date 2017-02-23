@@ -89,6 +89,8 @@ Command Palettes.
 * Beautify TTY output somehow (colorization or something)
 * Find a way to estimate how much time a search will take, and print this
   estimate before performing the search. (I'm not sure if this is possible).
+* Remove -c flag and automatically switch between powerwalk and filepath Walk
+  functions
 
 PRs for these would be appreciated.
 
