@@ -10,12 +10,13 @@ import (
 	"github.com/alecthomas/kingpin"
 	"github.com/kbrgl/fu/matchers"
 	"github.com/kbrgl/fu/shallowradix"
+	"github.com/mattn/go-isatty"
 	"github.com/stretchr/powerwalk"
 )
 
 const (
 	// Version is the program version
-	Version = "1.0.1"
+	Version = "1.1.0"
 )
 
 func main() {
@@ -91,7 +92,7 @@ func main() {
 			traversed++
 
 			if err != nil {
-				fmt.Fprintf(os.Stderr, "fu: %v\n", err)
+				fmt.Fprintf(os.Stderr, "%v\n", err)
 				return nil
 			}
 
@@ -109,10 +110,12 @@ func main() {
 		})
 	}
 
-	fmt.Printf("\nTraversed %d files in %s, found %d matches.\n",
-		traversed,
-		time.Since(start),
-		found)
+	if isatty.IsTerminal(os.Stdout.Fd()) {
+		fmt.Printf("\nTraversed %d files in %s, found %d matches.\n",
+			traversed,
+			time.Since(start),
+			found)
+	}
 }
 
 func fail(err error) {
