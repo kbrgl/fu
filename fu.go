@@ -13,6 +13,11 @@ import (
 	"github.com/stretchr/powerwalk"
 )
 
+const (
+	// Version is the program version
+	Version = "1.0.1"
+)
+
 func main() {
 	kingpin.CommandLine.HelpFlag.Short('h')
 	fz := kingpin.Flag("fuzzy", "Use fuzzy search").Short('f').Bool()
@@ -29,7 +34,7 @@ func main() {
 
 	query := kingpin.Arg("query", "Search query").Required().String()
 	paths := kingpin.Arg("paths", "Paths to search").Default(".").ExistingDirs()
-	kingpin.Version("1.0.0")
+	kingpin.Version(Version)
 	kingpin.Parse()
 
 	walk := filepath.Walk
