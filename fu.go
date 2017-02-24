@@ -16,11 +16,12 @@ import (
 
 const (
 	// Version is the program version
-	Version = "1.1.0"
+	Version = "1.1.1"
 )
 
 func main() {
 	kingpin.CommandLine.HelpFlag.Short('h')
+	kingpin.CommandLine.VersionFlag.Short('v')
 	fz := kingpin.Flag("fuzzy", "Use fuzzy search").Short('f').Bool()
 	re := kingpin.Flag("regexp", "Use regexp-based search").Short('r').Bool()
 	sfx := kingpin.Flag("suffix", "Use suffix-based search").Short('s').Bool()
