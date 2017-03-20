@@ -8,13 +8,13 @@ import (
 	"github.com/kbrgl/fuzzy"
 )
 
-// FileMatcher is an interface providing a Match method that can match on a
-// file.
+// FileMatcher is an interface providing a Match method that checks whether a
+// file satisfies some constraint.
 type FileMatcher interface {
 	Match(os.FileInfo) bool
 }
 
-// FuzzyMatcher is a FileMatcher that fuzzy-matches on the filename.
+// FuzzyMatcher fuzzy-matches the filename.
 type FuzzyMatcher struct {
 	pattern string
 }
@@ -24,13 +24,12 @@ func NewFuzzyMatcher(pattern string) *FuzzyMatcher {
 	return &FuzzyMatcher{pattern: pattern}
 }
 
-// Match fuzzy matches on fi.Name().
+// Match fuzzy-matches the filename.
 func (f FuzzyMatcher) Match(fi os.FileInfo) bool {
 	return fuzzy.MatchFold(fi.Name(), f.pattern)
 }
 
-// ExactMatcher is a FileMatcher that checks whether the filename is equal to
-// some value.
+// ExactMatcher checks the filename for exact equality with the expected value.
 type ExactMatcher struct {
 	expected string
 }
@@ -40,19 +39,18 @@ func NewExactMatcher(expected string) *ExactMatcher {
 	return &ExactMatcher{expected: expected}
 }
 
-// Match exact matches on fi.Name().
+// Match checks that the filename is exactly equal to the expected value.
 func (e ExactMatcher) Match(fi os.FileInfo) bool {
 	return fi.Name() == e.expected
 }
 
-// SuffixMatcher is a FileMatcher that checks whether the filename has some
-// suffix.
+// SuffixMatcher checks whether the filename has some suffix.
 type SuffixMatcher struct {
 	suffix string
 }
 
-// NewSuffixMatcher returns a SuffixMatcher that performs a check against the
-// provided suffix.
+// NewSuffixMatcher returns a SuffixMatcher that checks a string for the provided
+// suffix.
 func NewSuffixMatcher(suffix string) *SuffixMatcher {
 	return &SuffixMatcher{suffix: suffix}
 }
@@ -62,14 +60,13 @@ func (s SuffixMatcher) Match(fi os.FileInfo) bool {
 	return strings.HasSuffix(fi.Name(), s.suffix)
 }
 
-// PrefixMatcher is a FileMatcher that checks whether the filename has some
-// prefix.
+// PrefixMatcher checks whether the filename has some prefix.
 type PrefixMatcher struct {
 	prefix string
 }
 
-// NewPrefixMatcher returns a PrefixMatcher that performs a check against the
-// provided prefix.
+// NewPrefixMatcher returns a PrefixMatcher that checks a string for the provided
+// prefix.
 func NewPrefixMatcher(prefix string) *PrefixMatcher {
 	return &PrefixMatcher{prefix: prefix}
 }
@@ -79,8 +76,7 @@ func (p PrefixMatcher) Match(fi os.FileInfo) bool {
 	return strings.HasPrefix(fi.Name(), p.prefix)
 }
 
-// REMatcher is a FileMatcher that checks whether the filename matches a regexp
-// pattern.
+// REMatcher checks whether the filename matches a regexp pattern.
 type REMatcher struct {
 	pattern *regexp.Regexp
 }
@@ -100,7 +96,7 @@ func (r REMatcher) Match(fi os.FileInfo) bool {
 	return r.pattern.MatchString(fi.Name())
 }
 
-// PermMatcher is a FileMatcher that checks against the provided permissions.
+// PermMatcher checks against the provided permissions.
 type PermMatcher struct {
 	perm os.FileMode
 }
@@ -111,12 +107,12 @@ func NewPermMatcher(perm os.FileMode) *PermMatcher {
 	return &PermMatcher{perm: perm}
 }
 
-// Match compares fi's Permissions to the permissions set on p.
+// Match compares fi's permissions to the permissions set on p.
 func (p PermMatcher) Match(fi os.FileInfo) bool {
 	return fi.Mode().Perm()&p.perm != 0
 }
 
-// DirMatcher is a FileMatcher that filters dirs.
+// DirMatcher allows only dirs.
 type DirMatcher struct {
 }
 
@@ -125,12 +121,12 @@ func NewDirMatcher() *DirMatcher {
 	return &DirMatcher{}
 }
 
-// Match matches dirs.
+// Match returns true for dirs.
 func (d DirMatcher) Match(fi os.FileInfo) bool {
 	return fi.IsDir()
 }
 
-// AllMatcher is a FileMatcher matches everything.
+// AllMatcher allows everything.
 type AllMatcher struct {
 }
 
@@ -142,4 +138,21 @@ func NewAllMatcher() *AllMatcher {
 // Match always returns true.
 func (a AllMatcher) Match(_ os.FileInfo) bool {
 	return true
+}
+
+// SubstringMatcher checks the provided string for a substring.
+type SubstringMatcher struct {
+	// substring to look for
+	substring string
+}
+
+// NewSubstringMatcher returns a new SubstringMatcher.
+func NewSubstringMatcher(substring string) *SubstringMatcher {
+	return &SubstringMatcher{substring: substring}
+}
+
+// Match searches the filename for a given substring and returns true if it is
+// present.
+func (s SubstringMatcher) Match(fi os.FileInfo) bool {
+	return strings.Contains(fi.Name(), s.substring)
 }
