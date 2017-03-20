@@ -22,6 +22,12 @@ directories with thousands of files.
 * [Contributing](#contributing)
 
 ## Installation
+### Homebrew
+```
+brew tap kbrgl/fu https://github.com/kbrgl/fu.git
+brew install fu
+```
+### go get
 If you have Go installed, run
 ```sh
 go get -u github.com/kbrgl/fu
@@ -92,8 +98,8 @@ fu -f pkg
 ```
 
 Fuzzy search is the algorithm that Sublime Text and Atom use in their
-Command Palettes. For an explanation, check out [this Wikipedia article]
-(https://en.wikipedia.org/wiki/Approximate_string_matching).
+Command Palettes. For an explanation, check out
+[this Wikipedia article](https://en.wikipedia.org/wiki/Approximate_string_matching).
 
 ## TODO
 * Write tests for matchers
