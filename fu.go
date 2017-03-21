@@ -36,7 +36,7 @@ func main() {
 		Short('c').Bool()
 	older := kingpin.Flag("older", "Filter by age (modification time)").Short('o').Duration()
 	younger := kingpin.Flag("younger", "Filter by age (modification time)").Short('y').Duration()
-	exclude := kingpin.Flag("exclude", "Exludes files matching the filters").Short('e').Bool()
+	exclude := kingpin.Flag("exclude", "Excludes files matching the filters").Short('e').Bool()
 
 	query := kingpin.Arg("query", "Search query").Required().String()
 	paths := kingpin.Arg("paths", "Paths to search").Default(".").ExistingDirs()
