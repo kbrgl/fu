@@ -23,7 +23,7 @@ func main() {
 	kingpin.CommandLine.HelpFlag.Short('h')
 	fz := kingpin.Flag("fuzzy", "Use fuzzy search").Short('f').Bool()
 	re := kingpin.Flag("regexp", "Use regexp-based search").Short('r').Bool()
-	sfx := kingpin.Flag("suffix", "Use suffix-based search (short flag 'a' is short for for 'after')").Short('a').Bool()
+	sfx := kingpin.Flag("suffix", "Use suffix-based search (short flag 'a' is short for 'after')").Short('a').Bool()
 	pfx := kingpin.Flag("prefix", "Use prefix-based search (short flag 'b' is short for 'before')").Short('b').Bool()
 	substring := kingpin.Flag("substring",
 		"Use substring-based search allowing the query to be at any position in the filename").
