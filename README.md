@@ -59,7 +59,7 @@ Flags:
   -c, --parallel         Walk directories in parallel, may result in substantial speedups for directories with many files
   -o, --older=OLDER      Filter by age (modification time)
   -y, --younger=YOUNGER  Filter by age (modification time)
-  -e, --exclude          Exludes files matching the filters
+  -e, --exclude          Excludes files matching the filters
   -v, --version          Show application version.
 
 Args:
