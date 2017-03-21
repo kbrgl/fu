@@ -1,8 +1,8 @@
 class Fu < Formula
   desc "intuitive alternative to the find utility"
   homepage "https://github.com/kbrgl/fu"
-  url "https://github.com/kbrgl/fu/archive/v1.1.2.tar.gz"
-  sha256 "34dd0eade8842c4b9e82b56e4b2154e9bcb34843d87aef568ea8fe16a1c1884a"
+  url "https://github.com/kbrgl/fu/archive/v2.0.0.tar.gz"
+  sha256 "c9b3de10807f10da44ad5dda0a421d5b8ad1005964ba7d6ff8df7a270511de53"
   head "https://github.com/kbrgl/fu.git"
 
   depends_on "go" => :build
