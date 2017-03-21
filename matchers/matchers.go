@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/kbrgl/fuzzy"
+	"time"
 )
 
 // FileMatcher is an interface providing a Match method that checks whether a
@@ -124,6 +125,34 @@ func NewDirMatcher() *DirMatcher {
 // Match returns true for dirs.
 func (d DirMatcher) Match(fi os.FileInfo) bool {
 	return fi.IsDir()
+}
+
+type AgeOlderMatcher struct {
+	age time.Duration
+}
+
+func NewAgeOlderMatcher(age time.Duration) *AgeOlderMatcher {
+	return &AgeOlderMatcher{
+		age: age,
+	}
+}
+
+func (o AgeOlderMatcher) Match(fi os.FileInfo) bool {
+	return fi.ModTime().Before(time.Now().Add(-1 * o.age))
+}
+
+type AgeYoungerMatcher struct {
+	age time.Duration
+}
+
+func NewAgeYoungerMatcher(age time.Duration) *AgeYoungerMatcher {
+	return &AgeYoungerMatcher{
+		age: age,
+	}
+}
+
+func (y AgeYoungerMatcher) Match(fi os.FileInfo) bool {
+	return fi.ModTime().After(time.Now().Add(-1 * y.age))
 }
 
 // AllMatcher allows everything.

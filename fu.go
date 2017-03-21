@@ -34,6 +34,8 @@ func main() {
 		"Walk directories in parallel, may result in substantial speedups "+
 			"for directories with many files").
 		Short('c').Bool()
+	older := kingpin.Flag("older", "Filter by age (modification time)").Short('o').Duration()
+	younger := kingpin.Flag("younger", "Filter by age (modification time)").Short('y').Duration()
 
 	query := kingpin.Arg("query", "Search query").Required().String()
 	paths := kingpin.Arg("paths", "Paths to search").Default(".").ExistingDirs()
@@ -84,6 +86,12 @@ func main() {
 	}
 	if *dir {
 		ms = append(ms, matchers.NewDirMatcher())
+	}
+	if *older != 0 {
+		ms = append(ms, matchers.NewAgeOlderMatcher(*older))
+	}
+	if *younger != 0 {
+		ms = append(ms, matchers.NewAgeYoungerMatcher(*younger))
 	}
 
 	rdx := shallowradix.New()

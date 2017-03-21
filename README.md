@@ -48,21 +48,18 @@ Windows machine yet.
 usage: fu [<flags>] <query> [<paths>...]
 
 Flags:
-  -h, --help       Show context-sensitive help (also try --help-long and
-                   --help-man).
-  -f, --fuzzy      Use fuzzy search
-  -r, --regexp     Use regexp-based search
-  -a, --suffix     Use suffix-based search (short flag 'a' is short for for
-                   'after')
-  -b, --prefix     Use prefix-based search (short flag 'b' is short for
-                   'before')
-  -s, --substring  Use substring-based search allowing the query to be at any
-                   position in the filename
-  -d, --dir        Show only directories
-  -m, --perm=PERM  Filter by Unix permissions
-  -c, --parallel   Walk directories in parallel, may result in substantial
-                   speedups for directories with many files
-  -v, --version    Show application version.
+  -h, --help             Show context-sensitive help (also try --help-long and --help-man).
+  -f, --fuzzy            Use fuzzy search
+  -r, --regexp           Use regexp-based search
+  -a, --suffix           Use suffix-based search (short flag 'a' is short for 'after')
+  -b, --prefix           Use prefix-based search (short flag 'b' is short for 'before')
+  -s, --substring        Use substring-based search allowing the query to be at any position in the filename
+  -d, --dir              Show only directories
+  -m, --perm=PERM        Filter by Unix permissions
+  -c, --parallel         Walk directories in parallel, may result in substantial speedups for directories with many files
+  -o, --older=OLDER      Filter by age (modification time)
+  -y, --younger=YOUNGER  Filter by age (modification time)
+  -v, --version          Show application version.
 
 Args:
   <query>    Search query
