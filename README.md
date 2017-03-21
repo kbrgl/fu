@@ -27,6 +27,10 @@ directories with thousands of files.
 brew tap kbrgl/fu https://github.com/kbrgl/fu.git
 brew install fu
 ```
+Or, if you want the latest version from git, run `brew install` with the `--HEAD`
+flag. This is equivalent to running `go get`, except you'll be able to upgrade
+through Homebrew.
+
 ### go get
 If you have Go installed, run
 ```sh
