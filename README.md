@@ -24,7 +24,7 @@ directories with thousands of files.
 ## Installation
 ### Homebrew
 ```
-brew tap kbrgl/fu https://github.com/kbrgl/fu.git
+brew tap kbrgl/formulas
 brew install fu
 ```
 Or, if you want the latest version from git, run `brew install` with the `--HEAD`
