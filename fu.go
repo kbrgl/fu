@@ -11,7 +11,6 @@ import (
 	"github.com/alecthomas/kingpin"
 	"github.com/kbrgl/fu/matchers"
 	"github.com/kbrgl/fu/shallowradix"
-	"github.com/mattn/go-isatty"
 	"github.com/stretchr/powerwalk"
 )
 
@@ -134,14 +133,13 @@ func main() {
 		})
 	}
 
-	// Only print status message if outputting to a terminal, since we don't want
-	// this message to appear when using pipes or output redirection.
-	if isatty.IsTerminal(os.Stdout.Fd()) {
-		fmt.Printf("\nTraversed %d files in %s, found %d matches.\n",
-			traversed,
-			time.Since(start),
-			found)
-	}
+	// Print message to standard error, since we don't want it to appear when
+	// redirecting standard output.
+	fmt.Fprintf(os.Stderr,
+		"\nTraversed %d files in %s, found %d matches.\n",
+		traversed,
+		time.Since(start),
+		found)
 }
 
 func fail(err error) {
