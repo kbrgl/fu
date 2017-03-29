@@ -59,7 +59,6 @@ func main() {
 		nm  matchers.FileMatcher
 		err error
 	)
-
 	switch {
 	case *re:
 		nm, err = matchers.NewREMatcher(*query)
@@ -121,6 +120,7 @@ func main() {
 			for _, matcher := range ms {
 				if matcher.Match(fi) == *exclude {
 					matches = false
+					break
 				}
 			}
 
