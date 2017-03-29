@@ -5,8 +5,9 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/kbrgl/fuzzy"
 	"time"
+
+	"github.com/kbrgl/fuzzy"
 )
 
 // FileMatcher is an interface providing a Match method that checks whether a
@@ -37,7 +38,9 @@ type ExactMatcher struct {
 
 // NewExactMatcher returns a new ExactMatcher.
 func NewExactMatcher(expected string) *ExactMatcher {
-	return &ExactMatcher{expected: expected}
+	return &ExactMatcher{
+		expected: expected,
+	}
 }
 
 // Match checks that the filename is exactly equal to the expected value.
@@ -53,7 +56,9 @@ type SuffixMatcher struct {
 // NewSuffixMatcher returns a SuffixMatcher that checks a string for the provided
 // suffix.
 func NewSuffixMatcher(suffix string) *SuffixMatcher {
-	return &SuffixMatcher{suffix: suffix}
+	return &SuffixMatcher{
+		suffix: suffix,
+	}
 }
 
 // Match matches on the suffix of fi.Name().
@@ -69,7 +74,9 @@ type PrefixMatcher struct {
 // NewPrefixMatcher returns a PrefixMatcher that checks a string for the provided
 // prefix.
 func NewPrefixMatcher(prefix string) *PrefixMatcher {
-	return &PrefixMatcher{prefix: prefix}
+	return &PrefixMatcher{
+		prefix: prefix,
+	}
 }
 
 // Match matches on the prefix of fi.Name().
@@ -89,7 +96,9 @@ func NewREMatcher(pattern string) (*REMatcher, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &REMatcher{pattern: re}, nil
+	return &REMatcher{
+		pattern: re,
+	}, nil
 }
 
 // Match regex-matches on fi.Name().
@@ -105,7 +114,9 @@ type PermMatcher struct {
 // NewPermMatcher returns a new PermMatcher that performs a check against the
 // provided FileMode.
 func NewPermMatcher(perm os.FileMode) *PermMatcher {
-	return &PermMatcher{perm: perm}
+	return &PermMatcher{
+		perm: perm,
+	}
 }
 
 // Match compares fi's permissions to the permissions set on p.
@@ -127,30 +138,36 @@ func (d DirMatcher) Match(fi os.FileInfo) bool {
 	return fi.IsDir()
 }
 
+// AgeOlderMatcher checks that a file is older than a given duration.
 type AgeOlderMatcher struct {
 	age time.Duration
 }
 
+// NewAgeOlderMatcher returns a new AgeOlderMatcher.
 func NewAgeOlderMatcher(age time.Duration) *AgeOlderMatcher {
 	return &AgeOlderMatcher{
 		age: age,
 	}
 }
 
+// Match checks that the provided file is older than the duration set on o.
 func (o AgeOlderMatcher) Match(fi os.FileInfo) bool {
 	return fi.ModTime().Before(time.Now().Add(-1 * o.age))
 }
 
+// AgeYoungerMatcher checks that a file is younger than a given duration.
 type AgeYoungerMatcher struct {
 	age time.Duration
 }
 
+// NewAgeYoungerMatcher returns a new AgeYoungerMatcher.
 func NewAgeYoungerMatcher(age time.Duration) *AgeYoungerMatcher {
 	return &AgeYoungerMatcher{
 		age: age,
 	}
 }
 
+// Match checks that the provided file is younger than the duration set on y.
 func (y AgeYoungerMatcher) Match(fi os.FileInfo) bool {
 	return fi.ModTime().After(time.Now().Add(-1 * y.age))
 }
@@ -177,7 +194,9 @@ type SubstringMatcher struct {
 
 // NewSubstringMatcher returns a new SubstringMatcher.
 func NewSubstringMatcher(substring string) *SubstringMatcher {
-	return &SubstringMatcher{substring: substring}
+	return &SubstringMatcher{
+		substring: substring,
+	}
 }
 
 // Match searches the filename for a given substring and returns true if it is
