@@ -5,6 +5,7 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+	"sync/atomic"
 	"time"
 
 	"github.com/alecthomas/kingpin"
@@ -105,11 +106,11 @@ func main() {
 	}
 
 	// number of files found and number of files traversed
-	var found, traversed int
+	var found, traversed uint64
 	start := time.Now()
 	for _, path := range rdx.Prefixes() {
 		walk(path, func(path string, fi os.FileInfo, err error) error {
-			traversed++
+			atomic.AddUint64(&traversed, 1)
 
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "%v\n", err)
@@ -126,7 +127,7 @@ func main() {
 
 			if /* the file */ matches {
 				fmt.Println(path)
-				found++
+				atomic.AddUint64(&found, 1)
 			}
 
 			return nil
