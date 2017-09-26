@@ -115,6 +115,5 @@ Command Palettes. For an explanation, check out
 PRs for these would be appreciated.
 
 ## Contributing
-I've made an effort to keep the Fu source code simple, modular and easy to browse.
 Contributions are welcome. Just be sure to run `go fmt` and `go vet` on your
 code.
