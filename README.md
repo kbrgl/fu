@@ -103,12 +103,9 @@ Command Palettes. For an explanation, check out
 [this Wikipedia article](https://en.wikipedia.org/wiki/Approximate_string_matching).
 
 ## TODO
-* Write tests for matchers
-* Break up the main function into small, testable functions
-* Beautify TTY output somehow (colorization or something)
-* Find a way to estimate how much time a search will take, and print this
-  estimate before performing the search. (I'm not sure if this is possible).
-* Remove -c flag and automatically switch between powerwalk and filepath Walk
+- [ ] Write tests
+- [ ] Beautify TTY output
+- [x] Remove -c flag and automatically switch between powerwalk and filepath Walk
   functions
 
 PRs for these would be appreciated.
