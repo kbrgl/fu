@@ -40,8 +40,7 @@ If you don't, download the latest release and put it somewhere on your $PATH.
 
 ### Platform support
 Unix-based systems (macOS, Linux distros, \*BSDs, etc.) are supported.
-I'm guessing Windows will work as well, although I haven't tried it out on a
-Windows machine yet.
+Some features (like Unix permission filters) might not work on Windows.
 
 ## Usage
 ```sh
